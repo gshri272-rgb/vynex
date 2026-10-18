@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10091f">
+  <title>VYNEX — Media Tools</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0812;
+      color: #fff;
+    }
+    header {
+      padding: 22px 18px;
+      border-bottom: 1px solid #302044;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 27px; font-weight: 900; color: #c49aff; }
+    .tag { color: #c5b7d9; font-size: 12px; text-align: right; }
+    main {
+      max-width: 650px;
+      margin: 55px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { font-size: clamp(32px, 8vw, 48px); margin-bottom: 12px; }
+    h1 span { color: #b77aff; }
+    p { color: #bdb2cb; line-height: 1.6; }
+    .panel {
+      margin-top: 30px;
+      padding: 22px;
+      background: #171020;
+      border: 1px solid #44305c;
+      border-radius: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 15px;
+      background: #0c0912;
+      color: white;
+      border: 1px solid #55416d;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 13px;
+      padding: 15px;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #783de0, #b14bfa);
+    }
+    .note { font-size: 12px; }
+    footer { padding: 25px; text-align: center; color: #9385a5; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">VYNEX</div>
+    <div class="tag">NEXT-GEN MEDIA TOOLS</div>
+  </header>
+  <main>
+    <p>WELCOME TO YOUR DIGITAL WORLD</p>
+    <h1>Your Media.<br><span>Your Tools.</span></h1>
+    <p>A new home for useful media tools, built for mobile and desktop.</p>
+    <section class="panel">
+      <h2>Media Link Tool</h2>
+      <p>Paste a link to check available options.</p>
+      <form id="linkForm">
+        <input id="mediaUrl" type="url" placeholder="Paste a media URL..." required>
+        <button type="submit">Check Link ↗</button>
+      </form>
+      <p id="message" class="note">Demo only — downloading is not connected yet.</p>
+    </section>
+  </main>
+  <footer>© 2026 VYNEX · Built for the future 💜</footer>
+  <script>
+    document.getElementById("linkForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const field = document.getElementById("mediaUrl");
+      const message = document.getElementById("message");
+      try {
+        const url = new URL(field.value);
+        if (url.protocol !== "https:" && url.protocol !== "http:") {
+          throw new Error("Invalid protocol");
+        }
+        message.textContent = "Link received. A supported download service is not connected yet.";
+      } catch {
+        message.textContent = "Please enter a valid web link.";
+      }
+    });
+  </script>
+</body>
+</html>
