@@ -1,226 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vynex Matrix 2040 - Neural Network & High Rewards</title>
+    <title>Vynex Super App - AI Memory</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --matrix-glow: #00ff88;
-            --bg-dark: #05050a;
-            --panel-bg: #0d0d1a;
-            --text-main: #ffffff;
-            --neon-blue: #00d2ff;
-            --neon-pink: #ff007f;
-        }
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-        }
-        .matrix-header {
-            width: 100%;
-            max-width: 480px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--matrix-glow);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        .quantum-wallet {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--matrix-glow);
-            color: var(--matrix-glow);
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            box-shadow: 0 0 10px var(--matrix-glow);
-        }
-        .panel {
-            background: var(--panel-bg);
-            border: 1px solid #222244;
-            padding: 20px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 480px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.7);
-        }
-        h1, h3 { color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); margin: 5px 0; }
-        .cyber-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--neon-blue);
-            background: #020205;
-            color: #fff;
-            font-size: 14px;
-            border-radius: 6px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-        .cyber-input:focus { box-shadow: 0 0 10px var(--neon-blue); outline: none; }
-        .cyber-btn {
-            width: 100%;
-            background: transparent;
-            color: var(--matrix-glow);
-            border: 1px solid var(--matrix-glow);
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            text-shadow: 0 0 5px var(--matrix-glow);
-            box-shadow: inset 0 0 10px rgba(0,255,136,0.2);
-            transition: 0.3s;
-        }
-        .cyber-btn:hover { background: var(--matrix-glow); color: #000; box-shadow: 0 0 15px var(--matrix-glow); }
-        .voice-btn { background: var(--neon-pink); border-color: var(--neon-pink); color: white; margin-top: 10px; }
-        .voice-btn:hover { background: white; color: var(--neon-pink); box-shadow: 0 0 15px white; }
-        .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .matrix-card {
-            background: #020205;
-            border: 1px solid #333;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 8px;
-        }
-        .matrix-card:hover { border-color: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink); }
-        .payout-panel {
-            display: none;
-            border: 1px solid var(--neon-pink);
-            margin-top: 15px;
-            padding: 15px;
-            background: #000;
-        }
-        .log-stream { font-size: 11px; color: #888; text-align: left; margin-top: 10px; max-height: 50px; overflow-y: hidden; }
+        body { background-color: #0b0b0c; color: #ffffff; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 400px; }
+        h1 { font-size: 26px; color: #ff3b30; text-align: center; }
+        .card { background-color: #171719; border: 1px solid #232326; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        input { width: 90%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #222; color: #fff; margin-bottom: 10px; }
+        button { width: 100%; padding: 12px; border-radius: 8px; border: none; background-color: #ff3b30; color: white; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #e03028; }
+        .balance { font-size: 20px; color: #4cd964; text-align: center; font-weight: bold; }
+        .ai-status { font-size: 12px; color: #ffcc00; font-style: italic; margin-top: 10px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="matrix-header">
-        <h2>⚡ VYNEX 2040</h2>
-        <div class="quantum-wallet">📦 Q-Matrix: ₹<span id="rupeeVal">0.00</span></div>
+<div class="container">
+    <h1>Vynex Matrix</h1>
+
+    <!-- 1. वीडियो डाउनलोडर सेक्शन -->
+    <div class="card">
+        <h3>[ Neural Fetcher ]</h3>
+        <p>बिना वॉटरमार्क वीडियो डाउनलोड करें (AI मेमोरी एक्टिव)</p>
+        <input type="text" id="videoLink" placeholder="Paste Insta, YT, FB link here...">
+        <button onclick="downloadVideo()">EXECUTE CLEAN DOWNLOAD</button>
+        <div id="aiLog" class="ai-status">AI System: स्टैंडबाय मोड पर है...</div>
     </div>
 
-    <!-- Downloader Box with AI Watermark Remover Built-in -->
-    <div class="panel">
-        <h1>[Neural Fetcher]</h1>
-        <p style="font-size:11px; color:var(--matrix-glow); margin:-5px 0 10px 0;">⚡ Auto AI Watermark Remover Active</p>
-        <input type="text" id="videoLink" class="cyber-input" placeholder="Paste Video Link (YT, Pinterest, Reels)...">
-        <button class="cyber-btn" onclick="executeMatrixFetch()">EXECUTE CLEAN DOWNLOAD</button>
-        
-        <button class="cyber-btn voice-btn" onclick="activateVoiceNeuralLink()">🎙️ ACTIVATE VOICE NEURAL LINK</button>
-        
-        <div class="log-stream" id="terminalLogs">System: AI Always-On Security Active 🛡️</div>
-        <div id="downloadBox" style="display:none; margin-top:15px;">
-            <div id="resTitle" style="color:var(--matrix-glow); margin-bottom:10px;">Data Stream Found!</div>
-            <div id="optionsDiv"></div>
-        </div>
+    <!-- 2. अर्निंग और माइनिंग ज़ोन -->
+    <div class="card">
+        <h3>Core Mining Zone (5Hrs Target)</h3>
+        <p class="balance">आपका बैलेंस: ₹<span id="userMoney">0</span></p>
+        <p id="timerText">गेम खेलें और पैसे कमाएं!</p>
+        <button id="mineBtn" onclick="startMining()">START 5-HOUR MINING</button>
     </div>
+</div>
 
-    <!-- Futuristic Mining & Game System -->
-    <div class="panel">
-        <h3 style="color:var(--neon-pink);">🎮 Core Mining Zone (5Hrs Target)</h3>
-        <p style="font-size:11px; color:#aaa; margin:5px 0;">Process power allocations unlock ₹1000 Payout.</p>
+<!-- यहाँ से जावास्क्रिप्ट कोडिंग शुरू होती है -->
+<script>
+    let money = 0;
+
+    // AI मेमोरी सिस्टम: यह फंक्शन चेक करेगा कि डेटा पहले से हमारे पास है या नहीं
+    function aiSmartFetch(videoUrl) {
+        let logDiv = document.getElementById('aiLog');
         
-        <div class="game-grid">
-            <div class="matrix-card" onclick="startQuantumProcess('Matrix Rain')">
-                <div style="font-size:24px;">🧬</div>
-                <div>Matrix Rain</div>
-                <div style="color:var(--matrix-glow); font-size:12px;">+₹33.30/Loop</div>
-            </div>
-            <div class="matrix-card" onclick="startQuantumProcess('Cyber Grid')">
-                <div style="font-size:24px;">🌐</div>
-                <div>Cyber Grid</div>
-                <div style="color:var(--matrix-glow); font-size:12px;">+₹33.30/Loop</div>
-            </div>
-        </div>
+        // 1. सबसे पहले एआई अपने खुद के लोकल स्टोरेज (सिस्टम मेमोरी) में चेक करेगा
+        let savedRoute = localStorage.getItem(videoUrl);
 
-        <button class="cyber-btn" style="margin-top:15px; border-color:var(--neon-pink); color:var(--neon-pink);" onclick="triggerQuantumPayout()">💰 INITIALIZE BANK/UPI TRANSFER</button>
-
-        <!-- Secure 2040 Payout Form -->
-        <div class="payout-panel" id="payoutForm">
-            <h4 style="margin:0 0 10px 0; color:var(--neon-pink);">Quantum Payout Target</h4>
-            <input type="text" id="upiField" class="cyber-input" placeholder="Enter UPI Secure Address">
-            <input type="text" id="bankAcc" class="cyber-input" placeholder="Bank Core Account String">
-            <input type="text" id="bankIfsc" class="cyber-input" placeholder="IFSC Routing Hex">
-            <button class="cyber-btn" style="border-color:var(--matrix-glow);" onclick="verifyAndSendFunds()">CONFIRM TRANSFERENCE</button>
-        </div>
-    </div>
-
-    <script>
-        let userBalance = parseFloat(localStorage.getItem('_vx_matrix_bal')) || 0.00;
-        document.getElementById('rupeeVal').innerText = userBalance.toFixed(2);
-
-        function logToTerminal(message) {
-            document.getElementById('terminalLogs').innerText = `System: ${message}`;
-        }
-
-        function secureCredit(amount, tokenSig) {
-            if (tokenSig !== 'VALID_NEURAL_HASH_2040') {
-                logToTerminal("CRITICAL: Hacker signature detected. Protocol lockdown.");
-                alert("AI-Shield: Decentralized Verification Failed. Injection Blocked.");
-                return;
-            }
-            userBalance += amount;
-            localStorage.setItem('_vx_matrix_bal', userBalance);
-            document.getElementById('rupeeVal').innerText = userBalance.toFixed(2);
-        }
-
-        function activateVoiceNeuralLink() {
-            logToTerminal("Listening via Neural Node...");
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'en-US';
-                recognition.start();
-                
-                recognition.onresult = function(event) {
-                    const speechToText = event.results.transcript;
-                    logToTerminal(`Voice Detected: "${speechToText}"`);
-                    alert(`AI Voice Link: Scanning internet for "${speechToText}" download links...`);
-                }
-                recognition.onerror = function() { logToTerminal("Voice stream timed out."); }
-            } else {
-                alert("Voice Link Simulation: 'Download trending songs' voice matrix activated.");
-                logToTerminal("Voice stream simulated successfully.");
-            }
-        }
-
-        function startQuantumProcess(procName) {
-            logToTerminal(`Allocating processing logs to ${procName}...`);
-            setTimeout(() => {
-                secureCredit(33.30, 'VALID_NEURAL_HASH_2040');
-                logToTerminal(`Allocated ₹33.30 from ${procName}.`);
-                alert(`🧬 Quantum Core: ₹33.30 added securely via Node Mining!`);
-            }, 10000);
-        }
-
-        function triggerQuantumPayout() {
-            if (userBalance < 1000) {
-                alert(`🚨 Allocation Error: Current Balance ₹${userBalance.toFixed(2)}. Threshold requires ₹1000.00 to deploy blockchain transference.`);
-                return;
-            }
-            document.getElementById('payoutForm').style.display = 'block';
-        }
-
-        function verifyAndSendFunds() {
-            const upi = document.getElementById('upiField').value;
-            if(!upi) { alert("Transference requires valid destination string!"); return; }
+        if (savedRoute) {
+            logDiv.innerText = "AI System: डेटा अपने खुद के सिस्टम में मिल गया! API की कोई ज़रूरत नहीं।";
+            logDiv.style.color = "#4cd964"; // हरा रंग (Safe)
+            return JSON.parse(savedRoute); 
+        } else {
+            logDiv.innerText = "AI System: यह नया लिंक है, पहली बार बाहरी API से फेच करना होगा...";
+            logDiv.style.color = "#ffcc00"; // पीला रंग (Processing)
             
-            alert("🔒 Transference Dispatched! Blockchain Ledger updated. Admin dashboard will clear ₹1000 transmission within 24 hours.");
-            userBalance = 0.00;
-            localStorage.setItem('_vx_matrix_bal', userBalance);
-            document.getElementById('rupeeVal').innerText = userBalance.toFixed(2);
-            document.getElementById('payoutForm').style.display = 'none';
-        }
+            // नकली डेटा (जब असली API जोड़ेंगे तो यह उसकी जगह ले लेगा)
+            let fakeApiData = {
+                status: "Success",
+                downloadUrl: "https://vynex-server.com",
+                source: "Cloned_by_AI"
+            };
+            
+            // 2. सबसे ज़रूरी कदम: एआई इस डेटा और तरीके को हमेशा के लिए अपने अंदर लॉक कर लेगा
+            localStorage.setItem(videoUrl, JSON.stringify(fakeApiData));
+            
+            setTimeout(() => {
+                logDiv.innerText = "AI System: इस लिंक का कोड हमारे सिस्टम में हमेशा के लिए सेव हो गया!";
+                logDiv.style.color = "#007aff"; // नीला रंग (Saved)
+            }, 2000);
 
+            return fakeApiData;
+        }
+    }
+
+    // डाउनलोड बटन दबाने पर यह फंक्शन चलेगा
+    function downloadVideo() {
+        let link = document.getElementById('videoLink').value;
+        if(link === "") {
+            alert("कृपया पहले वीडियो का लिंक पेस्ट करें!");
+            return;
+        }
         
+        // एआई मेमोरी सिस्टम को कॉल कर रहे हैं
+        let videoData = aiSmartFetch(link);
+        console.log("वीडियो डेटा प्रोसेस हुआ:", videoData);
+    }
+
+    // अर्निंग टाइमर फंक्शन
+    function startMining() {
+        document.getElementById('mineBtn').disabled = true;
+        document.getElementById('timerText').innerText = "AI माइनिंग चालू है... सुरक्षा एक्टिव है!";
+        
+        setTimeout(function() {
+            money += 1000;
+            document.getElementById('userMoney').innerText = money;
+            document.getElementById('timerText').innerText = "बधाई हो! आपने ₹1000 कमा लिए हैं।";
+            document.getElementById('mineBtn').disabled = false;
+        }, 5000); // टेस्टिंग के लिए 5 सेकंड
+    }
+</script>
+
+</body>
+</html>
